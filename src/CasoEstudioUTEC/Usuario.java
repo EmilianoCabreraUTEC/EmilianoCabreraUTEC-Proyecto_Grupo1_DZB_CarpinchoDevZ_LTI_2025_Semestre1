@@ -1,8 +1,8 @@
 package CasoEstudioUTEC;
 
 public class Usuario {
-    String nombreUsuario;
-    String contrasenia;
-    String correoInstitucional;
-    int edad;
+    private String nombreUsuario;
+    private String contrasenia;
+    private String correoInstitucional;
+    private int edad;
 }
