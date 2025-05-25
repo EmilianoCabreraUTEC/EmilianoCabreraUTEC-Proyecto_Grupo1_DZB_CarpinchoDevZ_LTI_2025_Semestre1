@@ -1,0 +1,52 @@
+package CasoEstudioUTEC;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+    public class InstanciaSeguimiento {
+        private String id; //código identificador único
+        private String titulo;
+        private LocalDate fecha;
+        private LocalTime hora;
+        private String tipo;        // puede ser: reunión, llamado, coordinación.
+        private boolean confidencial;
+        private Usuario.Estudiante estudiante;  //falta crear esta subclase: Estudiante
+        private Usuario creadoPor;
+        private String comentarios;
+        private String campoConfidencial;
+        private boolean cancelada;
+
+        // Constructor
+        public InstanciaSeguimiento(String id, String titulo, LocalDate fecha, LocalTime hora, String tipo, boolean confidencial,
+                                    Usuario.Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
+            this.id = generarIdUnico();
+            this.titulo = titulo;
+            this.fecha = fecha;
+            this.hora = hora;
+            this.tipo = tipo;
+            this.confidencial = confidencial;
+            this.estudiante = estudiante;
+            this.creadoPor = creadoPor;
+            this.comentarios = comentarios;
+            this.campoConfidencial = campoConfidencial;
+            this.cancelada = false;
+        }
+        // Métodos
+        private String generarIdUnico() {
+            return UUID.randomUUID().toString(); //no se como se arma el metodo para que sean con orden secuencial
+        }
+        public CasoEstudioUTEC.InstanciaSeguimiento clonar() {
+            return new CasoEstudioUTEC.InstanciaSeguimiento(
+                    this.titulo + " (copia)",
+                    this.fecha,
+                    this.hora,
+                    this.tipo,
+                    this.confidencial,
+                    this.estudiante,
+                    this.creadoPor,
+                    this.comentarios,
+                    this.campoConfidencial
+            );
+        }
+    }
+}
