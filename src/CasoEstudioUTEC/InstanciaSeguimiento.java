@@ -32,6 +32,7 @@ public class InstanciaSeguimiento {
         this.campoConfidencial = campoConfidencial;
         this.cancelada = false;
     }
+
     // Métodos
     private String generarIdUnico() {
         return UUID.randomUUID().toString(); //no se como se arma el metodo para que sean con orden secuencial
