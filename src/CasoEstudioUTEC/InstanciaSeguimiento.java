@@ -2,23 +2,24 @@ package CasoEstudioUTEC;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class InstanciaSeguimiento {
-    private int id; //código identificador único
+    private String id; //código identificador único
     private String titulo;
     private LocalDate fecha;
     private LocalTime hora;
     private String tipo;        // puede ser: reunión, llamado, coordinación.
     private boolean confidencial;
-    private Estudiante estudiante  //falta crear esta subclase: Estudiante
+    private Estudiante estudiante;  //falta crear esta subclase: Estudiante
     private Usuario creadoPor;
     private String comentarios;
     private String campoConfidencial;
     private boolean cancelada;
 
     // Constructor
-    public Instancia(String titulo, LocalDate fecha, LocalTime hora, String tipo, boolean confidencial,
-                     Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
+    public InstanciaSeguimiento(String id, String titulo, LocalDate fecha, LocalTime hora, String tipo, boolean confidencial,
+                                Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
         this.id = generarIdUnico();
         this.titulo = titulo;
         this.fecha = fecha;
@@ -35,4 +36,5 @@ public class InstanciaSeguimiento {
 
     private String generarIdUnico() {
         return UUID.randomUUID().toString(); //no se como se arma el metodo para que sean con orden secuencial
+    }
 }
