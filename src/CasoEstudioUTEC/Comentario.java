@@ -34,7 +34,7 @@ public class Comentario {
         return confidencial;
     }
 
-    // Setters (solo si necesitás modificar el contenido)
+    // Setters (solo si necesita modificar el contenido)
     public void setTexto(String texto) {
         this.texto = texto;
     }
