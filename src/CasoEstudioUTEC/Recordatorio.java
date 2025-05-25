@@ -13,12 +13,33 @@ public class Recordatorio {
 
 
     //constructor, fecha y hora se reciben como string y se parsean
+    //esto momentaneamente para validar y testear en limpio creaciones de las instancias
+    // una vez que tengamos todo acomodado podemos hacer que se reciba en el formato nativo localdate o localtime para facilitar el codigo
+
     public Recordatorio(String titulo, String tipo, String fechaString, String horaString, String frecuencia) {
         this.titulo = titulo;
         this.tipo = tipo;
         this.fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
         this.frecuencia = frecuencia;
+    }
+
+    // Por ahora un par de getters/setters sencillos, se entiende que mas adelante modificaremos y completaremos el codigo segun necesidades
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setFecha(String nuevaFechaString) {
+        this.fecha = LocalDate.parse(nuevaFechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     @Override
@@ -33,6 +54,9 @@ public class Recordatorio {
     }
 }
 
-// ejemplo de creación de un recordatorio,
-//Recordatorio r = new Recordatorio("Reunión", "Académico", "2025-05-10", "14:30", "Única");
+/*
+ejemplo de creación de un recordatorio:
+Recordatorio r = new Recordatorio("Reunión", "Académico", "05-10-2025", "14:30", "Única");
+fecha recibe dia-mes-año , esta formateado con datetimeformatter a ddMMyyyy
+ */
 
