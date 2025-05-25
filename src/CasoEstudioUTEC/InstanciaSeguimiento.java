@@ -34,12 +34,16 @@ import java.util.UUID;
             this.campoConfidencial = campoConfidencial;
             this.cancelada = false;
         }
+
+        public InstanciaSeguimiento(String titulo, LocalDate fecha, LocalTime hora, String tipo, boolean confidencial, Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
+        }
+
         // Métodos
         private String generarIdUnico() {
             return UUID.randomUUID().toString(); //no se como se arma el metodo para que sean con orden secuencial
         }
-        public CasoEstudioUTEC.InstanciaSeguimiento clonar() {
-            return new CasoEstudioUTEC.InstanciaSeguimiento(
+        public InstanciaSeguimiento clonar() {
+            return new InstanciaSeguimiento(
                     this.titulo + " (copia)",
                     this.fecha,
                     this.hora,
@@ -50,6 +54,5 @@ import java.util.UUID;
                     this.comentarios,
                     this.campoConfidencial
             );
-        }
     }
 }
