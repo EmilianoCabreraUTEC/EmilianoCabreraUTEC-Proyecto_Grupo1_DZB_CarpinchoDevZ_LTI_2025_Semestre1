@@ -16,7 +16,6 @@ import java.time.LocalTime;
         private String campoConfidencial;
         private boolean cancelada;
 
-
         // Constructor
         public InstanciaSeguimiento(String id, String titulo, LocalDate fecha, LocalTime hora, String tipo, boolean confidencial,
                                     Usuario.Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
