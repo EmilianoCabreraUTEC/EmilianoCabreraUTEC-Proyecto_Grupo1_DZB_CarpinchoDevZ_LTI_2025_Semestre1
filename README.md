@@ -2,8 +2,8 @@
 
 ## Descripción
 Este proyecto consiste en la implementación de clases en Java a
-partir de un conjunto de requerimientos funcionales y no
-funcionales. Se busca representar adecuadamente las entidades del
+partir de un conjunto de requerimientos funcionales, no funcionales y de dominio.
+Se busca representar adecuadamente las entidades del
 sistema y sus relaciones, sin utilizar diagramas de clases.
 
 ---
@@ -28,11 +28,11 @@ de productos al ser creado.]
 ---
 
 ## 󰞵 Participantes
-| Nombre completo | Usuario GitLab | Aporte principal |
-|-----------------|----------------|------------------|
-| Ana Gómez | @ana.gomez | Clase Cliente |
-| Juan Pérez | @juan.perez | Clase Pedido |
-| Lucía Sosa | @lucia.sosa | Clase Producto |
+| Nombre completo | Usuario GitHub  | Aporte principal                                      |
+|-----------------|-----------------|-------------------------------------------------------|
+| Lucas Acuña     | @LucasAcunaUTEC | Clases: Reporte, Recordatorio, Comentario, Incidencia |
+| Juan Pérez      | @juan.perez     | Clase Pedido                                          |
+| Lucía Sosa      | @lucia.sosa     | Clase Producto                                        |
 > Se puede verificar la participación individual a través del
 historial de commits en este repositorio.
 
