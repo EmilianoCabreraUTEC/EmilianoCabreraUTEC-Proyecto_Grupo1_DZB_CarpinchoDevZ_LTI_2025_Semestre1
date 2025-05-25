@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 public class Recordatorio {
+    private String id;
     private String titulo;
     private String tipo;
     private LocalDate fecha;
@@ -18,6 +19,7 @@ public class Recordatorio {
     // una vez que tengamos todo acomodado podemos hacer que se reciba en el formato nativo localdate o localtime para facilitar el codigo
 
     public Recordatorio(String titulo, String tipo, String fechaString, String horaString, String frecuencia) {
+        this.id = generarIdUnico();
         this.titulo = titulo;
         this.tipo = tipo;
         this.fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));

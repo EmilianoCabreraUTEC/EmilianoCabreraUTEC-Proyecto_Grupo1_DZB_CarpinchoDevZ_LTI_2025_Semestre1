@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Reporte {
+    private String id;
     private Estudiante estudiante; //falta aun la subclase Estudiante, se asume que tendra metodos getNombre y getApellido
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -19,6 +20,7 @@ public class Reporte {
 
 public Reporte(Estudiante estudiante, LocalDate fechaInicio, LocalDate fechaFin,
                List<InstanciaSeguimiento> instancias, List<Recordatorio> recordatorios) {
+    this.id = generarIdUnico();
     this.estudiante = estudiante;
     this.fechaInicio = fechaInicio;
     this.fechaFin = fechaFin;
@@ -28,6 +30,14 @@ public Reporte(Estudiante estudiante, LocalDate fechaInicio, LocalDate fechaFin,
     private String generarIdUnico() {
         return UUID.randomUUID().toString();
     }
+
+    /* getId asumimos que aun no es necesario, luego se puede usar para maniobrar los reportes
+    public String getId() {
+        return id;
+        }
+ */
+
+
 // De momento algunos getters sencillos, más adelante evaluaremos según los requerimentos el tema de generar pdf o csv
 
     public Estudiante getEstudiante() {
