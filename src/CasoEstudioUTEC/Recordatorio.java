@@ -3,6 +3,7 @@ package CasoEstudioUTEC;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class Recordatorio {
     private String titulo;
@@ -24,6 +25,9 @@ public class Recordatorio {
         this.frecuencia = frecuencia;
     }
 
+    private String generarIdUnico() {
+        return UUID.randomUUID().toString();
+    }
     // Por ahora un par de getters/setters sencillos, se entiende que mas adelante modificaremos y completaremos el codigo segun necesidades
 
     public String getTitulo() {
