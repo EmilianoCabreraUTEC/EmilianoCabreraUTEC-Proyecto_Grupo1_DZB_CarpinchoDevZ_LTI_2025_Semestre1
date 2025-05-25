@@ -3,6 +3,7 @@ package CasoEstudioUTEC;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
     public class InstanciaSeguimiento {
         private String id; //código identificador único
@@ -19,8 +20,8 @@ import java.time.format.DateTimeFormatter;
 
 
         // Constructor
-        public InstanciaSeguimiento(String id, String titulo, String fechaString, String horaString, String tipo, boolean confidencial,
-                                    Usuario.Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
+        public InstanciaSeguimiento(String titulo, String fechaString, String horaString, String tipo, boolean confidencial,
+                                    Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial) {
             this.id = generarIdUnico();
             this.titulo = titulo;
             this.fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
@@ -35,7 +36,7 @@ import java.time.format.DateTimeFormatter;
         }
         // Métodos
         private String generarIdUnico() {
-            return id.wait().toString(); //no se como se arma el metodo para que sean con orden secuencial
+            return UUID.randomUUID().toString(); //no se como se arma el metodo para que sean con orden secuencial
         }
         public CasoEstudioUTEC.InstanciaSeguimiento clonar() {
             return new CasoEstudioUTEC.InstanciaSeguimiento(
