@@ -36,8 +36,6 @@ public class InstanciaSeguimiento {
     private String generarIdUnico() {
         return UUID.randomUUID().toString(); //no se como se arma el metodo para que sean con orden secuencial
     }
-
-
     public InstanciaSeguimiento clonar() {
         return new InstanciaSeguimiento(
                 this.titulo + " (copia)",
