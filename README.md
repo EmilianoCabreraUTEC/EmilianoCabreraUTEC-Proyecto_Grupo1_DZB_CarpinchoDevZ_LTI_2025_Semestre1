@@ -39,7 +39,7 @@ historial de commits en este repositorio.
 ---
 
 ## Requisitos técnicos
-- Proyecto desarrollado en Java (versión 21.algoalgo).
+- Proyecto desarrollado en Java (versión 21.0.6).
 - Estructura clara y coherente del código.
 - Comentarios explicativos incluidos donde se considere necesario.
 
