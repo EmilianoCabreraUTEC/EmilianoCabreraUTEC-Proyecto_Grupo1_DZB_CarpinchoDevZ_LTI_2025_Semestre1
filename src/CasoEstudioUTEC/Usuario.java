@@ -38,14 +38,17 @@ public class Usuario {
         this.nombre=extraerNombre(correoInstitucional);//saca el nombre directamente desde el correo
         this.apellido=extraerApellido(correoInstitucional);//lo mismo
     }
-    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol) {
+    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol, String ITR, String direccion) {
         this.correoInstitucional = correoInstitucional;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.contrasenia = crearContrasenia();
         this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.edad=calcularEdad(this.fechaNacimiento);
         this.cedulaIdentidad=cedulaId;
         this.rol=rol;
+        this.ITR=ITR;
+        this.direccion=direccion;
     }
     private String crearContrasenia() {
         char[] caracteres = {'a', 'b', 'c', 'd', 'e', 'f', '?','!','=','&','%','g', 'h', 'i', 'j', 'k','1','2','3','4', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','5','6','7','8','9','0'};
@@ -97,5 +100,46 @@ public class Usuario {
     public void setEdad(String edad) {
         this.edad = Integer.parseInt(edad);
     }
-    //continuar con getter y setter mas toString
+    public String getCedulaIdentidad() {
+        return cedulaIdentidad;
+    }
+    public void setCedulaIdentidad(String cedulaIdentidad) {
+        this.cedulaIdentidad = cedulaIdentidad;
+    }
+    public String getITR() {
+        return ITR;
+    }
+    public void setITR(String ITR) {
+        this.ITR = ITR;
+    }
+    public String getRol() {
+        return rol;
+    }
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    public String getDireccion() {
+        return direccion;
+    }
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+    public String getCorreoInstitucional() {
+        return correoInstitucional;
+    }
+    public void setCorreoInstitucional(String correoInstitucional) {
+        this.correoInstitucional = correoInstitucional;
+    }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    public String getTelefono() {
+        return telefono;
+    }
 }
