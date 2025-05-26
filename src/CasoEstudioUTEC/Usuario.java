@@ -1,7 +1,7 @@
 package CasoEstudioUTEC;
 
 import java.time.LocalDate;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
 public class Usuario {
     private String nombre;
@@ -31,9 +31,21 @@ public class Usuario {
     //-Si un usuario tiene un permiso este es "true", de caso contrario este es "false"
     //-La asignacion de roles debe hacerse desde el constuctor de cada clase
 
+    //construcor para añadir un usuario solo con el correo, la contraseña se genera sola y se envia al correo
     public Usuario(String correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
         this.contrasenia = crearContrasenia();
+        this.nombre=extraerNombre(correoInstitucional);//saca el nombre directamente desde el correo
+        this.apellido=extraerApellido(correoInstitucional);//lo mismo
+    }
+    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol) {
+        this.correoInstitucional = correoInstitucional;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.edad=calcularEdad(this.fechaNacimiento);
+        this.cedulaIdentidad=cedulaId;
+        this.rol=rol;
     }
     private String crearContrasenia() {
         char[] caracteres = {'a', 'b', 'c', 'd', 'e', 'f', '?','!','=','&','%','g', 'h', 'i', 'j', 'k','1','2','3','4', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','5','6','7','8','9','0'};
@@ -44,6 +56,22 @@ public class Usuario {
             contrasenia.append(caracteres[(int) Math.ceil(Math.random()*(caracteres.length-1))]);
         }
         return contrasenia.toString();
+    }
+    private String extraerNombre(String correo) {
+        String nombre="";
+        nombre=correo.substring(0,correo.indexOf(".")).toUpperCase();//quita el ".apellido@dominio"
+        return nombre;
+    }
+    private String extraerApellido(String correo) {
+        String apellido="";
+        apellido=correo.substring(correo.indexOf(".")+1,correo.indexOf("@")).toUpperCase();//quita el nombre y el "@utec.edu.uy" del correo
+        return apellido;
+    }
+    private int calcularEdad(LocalDate fechaNacimiento) {
+        int edad=0;
+        LocalDate fechaActual=LocalDate.now();
+        edad=fechaActual.getYear() - fechaNacimiento.getYear();
+        return edad;
     }
     public String getNombre() {
         return nombre;
@@ -63,8 +91,11 @@ public class Usuario {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    public String getEdad() {
-        return edad + "";
+    public int getEdad() {
+        return edad;
     }
-
+    public void setEdad(String edad) {
+        this.edad = Integer.parseInt(edad);
+    }
+    //continuar con getter y setter mas toString
 }
