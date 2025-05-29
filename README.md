@@ -25,11 +25,11 @@ vez creado.
 ---
 
 ## 󰞵 Participantes
-| Nombre completo | Usuario GitHub  | Aporte principal                                      |
-|-----------------|-----------------|-------------------------------------------------------|
-| Lucas Acuña     | @LucasAcunaUTEC | Clases: Reporte, Recordatorio, Comentario, Incidencia |
-| Juan Pérez      | @juan.perez     | Clase Pedido                                          |
-| Leticia Rojí    | @leticia-roji   | Clase InstanciaSeguimiento, Psicopedagogo             |
+| Nombre completo | Usuario GitHub  | Aporte principal                                                      |
+|-----------------|-----------------|-----------------------------------------------------------------------|
+| Lucas Acuña     | @LucasAcunaUTEC | Clase: Reporte, Recordatorio, Comentario, Incidencia, Rol, Estudiante |
+| Juan Pérez      | @juan.perez     | Clase Pedido                                                          |
+| Leticia Rojí    | @leticia-roji   | Clase InstanciaSeguimiento, Psicopedagogo                             |
 > Se puede verificar la participación individual a través del
 historial de commits en este repositorio.
 
