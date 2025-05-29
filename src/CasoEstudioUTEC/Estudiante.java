@@ -22,12 +22,11 @@ public class Estudiante extends Usuario {
     }
 
     // Constructor completo
-    public Estudiante(String nombre, String apellido, java.time.LocalDate fechaNacimiento, String direccion, String itr,
-                      String correoInstitucional, Rol rol, String carrera, int semestre, String grupo,
+    public Estudiante(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String ITR, String rol, String direccion, String carrera, int semestre, String grupo,
                       String sistemaSalud, String motivoSeguimiento, String estadoSalud, String tratamientoMedico,
                       String estado, String prioridadSeguimiento) {
 
-        super(nombre, apellido, fechaNacimiento, direccion, itr, correoInstitucional, rol);
+        super(correoInstitucional,nombre,apellido,fechaNacimiento,cedulaId,ITR,rol,direccion);
         this.carrera = carrera;
         this.semestre = semestre;
         this.grupo = grupo;
