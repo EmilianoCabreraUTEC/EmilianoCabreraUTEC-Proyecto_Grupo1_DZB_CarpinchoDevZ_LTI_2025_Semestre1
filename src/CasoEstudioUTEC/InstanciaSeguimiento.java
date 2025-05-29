@@ -121,6 +121,25 @@ import java.util.UUID; //
         private String generarIdUnico() {
             return UUID.randomUUID().toString(); //para que genere un id único
         }
+
+        @Override
+        public String toString() {
+            return "Instancia " +
+                    "ID= " + id + '\'' +
+                    ", Titulo='" + titulo + '\'' +
+                    ", Fecha= " + fecha +
+                    ", Hora= " + hora +
+                    ", Tipo= " + tipo + '\'' +
+                    ", Confidencial= " + confidencial +
+                    ", Estudiante= " + estudiante +
+                    ", Creado por= " + creadoPor +
+                    ", Comentarios='" + comentarios + '\'' +
+                    ", Información confidencial= " + campoConfidencial + '\'' +
+                    ", Cancelada=" + cancelada +
+                    ", Motivada por estudiante= " + motivadaPorEstudiante +
+                    '}';
+        }
+
         public InstanciaSeguimiento clonar() {
             return new InstanciaSeguimiento(
                     this.titulo + " (copia)",
