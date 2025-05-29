@@ -1,10 +1,9 @@
-# Proyecto - Grupo – UTEC <--Necesita edicion, esto es solo la plantilla
+# Proyecto SIENEP - Grupo 1 DZB – UTEC 
 
 ## Descripción
 Este proyecto consiste en la implementación de clases en Java a
 partir de un conjunto de requerimientos funcionales, no funcionales y de dominio.
-Se busca representar adecuadamente las entidades del
-sistema y sus relaciones, sin utilizar diagramas de clases.
+Se busca representar adecuadamente las entidades del sistema y sus relaciones, sin utilizar diagramas de clases.
 
 ---
 
@@ -20,8 +19,8 @@ entrega.
 ---
 
 ## Supuestos de diseño
-- [Ejemplo: Se asume que un cliente no puede modificar su cédula una
-vez creado.]
+-Se asume que un usuario no puede modificar su cédula una
+vez creado.
 - [Ejemplo: Se considera que un pedido puede tener una lista vacía
 de productos al ser creado.]
 
