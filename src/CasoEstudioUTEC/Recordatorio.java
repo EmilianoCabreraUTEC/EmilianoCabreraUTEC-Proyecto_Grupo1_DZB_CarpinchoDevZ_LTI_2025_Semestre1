@@ -43,6 +43,9 @@ public class Recordatorio {
     public LocalTime getHora() {
         return hora;
     }
+    public String getFrecuencia() { return frecuencia;}
+    public String getTipo() {return tipo;}
+    public String getId() {return id;}
 
     public void setFecha(String nuevaFechaString) {
         this.fecha = LocalDate.parse(nuevaFechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));

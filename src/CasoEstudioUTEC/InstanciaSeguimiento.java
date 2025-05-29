@@ -150,7 +150,7 @@ import java.util.UUID; //
                     this.creadoPor,
                     this.comentarios,
                     this.campoConfidencial,
-                    this.motivadaPorEstudiante,
+                    this.motivadaPorEstudiante
             );
 
     }
