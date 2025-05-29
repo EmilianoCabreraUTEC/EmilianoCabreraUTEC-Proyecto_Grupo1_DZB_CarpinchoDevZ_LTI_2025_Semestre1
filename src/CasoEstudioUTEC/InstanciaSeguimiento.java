@@ -121,7 +121,6 @@ import java.util.UUID; //
         private String generarIdUnico() {
             return UUID.randomUUID().toString(); //para que genere un id único
         }
-
         @Override
         public String toString() {
             return "Instancia " +
