@@ -34,16 +34,30 @@ public class Rol {
 
     // metodos para trabajar en un futuro
 
-    public void permisosEstudiante() {
-        // Lógica a implementar
-    }
-
-    public void permisosPsicopedagogo() {
-        // Lógica a implementar
-    }
-
-    public void permisosAdministrador() {
-        // Lógica a implementar
+    // permisos para un estudiante
+    public static List<String> permisosEstudiante() {
+            return List.of("ver_perfil", "editar_perfil");
+        }
+    // permisos para un psicopedagogo
+    public static List<String> permisosPsicopedagogo() {
+    return List.of(
+            "ver_confidencial",
+            "crear_instancia",
+            "editar_comentarios",
+            "crear_recordatorio",
+            "consultar_historial",
+            "generar_informes"
+    );
+}
+    // prmisos para un administrador
+    public static List<String> permisosAdministrador() {
+        return List.of(
+                "crear_usuario",
+                "desactivar_usuario",
+                "asignar_roles",
+                "ver_todos_los_datos",
+                "gestionar_permisos"
+        );
     }
 
     @Override
