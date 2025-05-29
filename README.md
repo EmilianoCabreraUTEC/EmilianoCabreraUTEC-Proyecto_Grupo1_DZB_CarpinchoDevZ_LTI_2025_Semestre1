@@ -21,8 +21,6 @@ entrega.
 ## Supuestos de diseño
 -Se asume que un usuario no puede modificar su cédula una
 vez creado.
-- [Ejemplo: Se considera que un pedido puede tener una lista vacía
-de productos al ser creado.]
 
 ---
 
@@ -31,7 +29,7 @@ de productos al ser creado.]
 |-----------------|-----------------|-------------------------------------------------------|
 | Lucas Acuña     | @LucasAcunaUTEC | Clases: Reporte, Recordatorio, Comentario, Incidencia |
 | Juan Pérez      | @juan.perez     | Clase Pedido                                          |
-| Lucía Sosa      | @lucia.sosa     | Clase Producto                                        |
+| Leticia Rojí    | @leticia-roji   | Clase InstanciaSeguimiento, Psicopedagogo             |
 > Se puede verificar la participación individual a través del
 historial de commits en este repositorio.
 
