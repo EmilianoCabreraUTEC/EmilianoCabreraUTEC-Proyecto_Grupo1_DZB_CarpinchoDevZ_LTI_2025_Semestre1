@@ -14,23 +14,7 @@ public abstract class Usuario {
     private LocalDate fechaNacimiento;
     private int edad;
     private String cedulaIdentidad;
-    private String ITR;//ITR significa Instituto Tecnologico Regional, y refiere a la sede de la UTEC a la cual pertenece el usuario, ya sea como estudiante o como funcionariolos estudiantes solo pueden tener un ITR, no se los demas funcionarios
-    private String rol;//ej: "administrador", "estudiante", "psicopedagogo", "area legal", "otro funcionario"
-    private boolean permisoIngresarModificarYEliminarUsuarios;
-    private boolean permisoCrearModificarVisualizarYEliminarInstancias;
-    private boolean permisoCrearEliminarYModificarIncidencias;
-    private boolean permisoCrearEliminarYModificarReportes;
-    private boolean permisoCrearEliminarYModificarRecordatorios;
-    private boolean permisoVisualizarDatosSensibles;
-
-    //¿Cómo funiconan los permisos?
-    //-Cada usuario tiene acceso a determinados permisos, por ejemplo:
-    //--Administrador: todos los permisos
-    //--Psicopedagogo: todos menos los de usuario
-    //--Otro funcionario: solo pueden acceder a la informacion no confidencial
-    //---Consultar la letra de caso de estudio para mas informacion acerca de los roles y permisos
-    //-Si un usuario tiene un permiso este es "true", de caso contrario este es "false"
-    //-La asignacion de roles debe hacerse desde el constuctor de cada clase
+    private String rol;
 
     //construcor para añadir un usuario solo con el correo, la contraseña se genera sola y se envia al correo
     public Usuario(String correoInstitucional) {
@@ -38,9 +22,9 @@ public abstract class Usuario {
         this.nombreUsuario = crearNombreDeUsuario();
         this.contrasenia = crearContrasenia();
         this.nombre=extraerNombre(correoInstitucional);//saca el nombre directamente desde el correo
-        this.apellido=extraerApellido(correoInstitucional);//lo mismo
+        this.apellido=extraerApellido(correoInstitucional);//lo mismo, pero con el apellido
     }
-    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String ITR, String rol, String direccion) {
+    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol, String direccion) {
         this.correoInstitucional = correoInstitucional;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -49,7 +33,6 @@ public abstract class Usuario {
         this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.edad=calcularEdad(this.fechaNacimiento);
         this.cedulaIdentidad=cedulaId;
-        this.ITR=ITR;
         this.rol=rol;
         this.direccion=direccion;
     }
@@ -126,12 +109,6 @@ public abstract class Usuario {
     public String getCedulaIdentidad() {
         return cedulaIdentidad;
     }
-    public String getITR() {
-        return ITR;
-    }
-    public void setITR(String ITR) {
-        this.ITR = ITR;
-    }
     public String getRol() {
         return rol;
     }
@@ -160,7 +137,6 @@ public abstract class Usuario {
     public String getTelefono() {
         return telefono;
     }
-    //setters de los permisos, solo pueden accederse interamente por la clase
 
     // Metodo para cambiar la contraseña (como aclaramos que respete el formato anterior y que no pueda guardar la misma?)
     public boolean cambiarContrasenia(String nuevaContrasenia) {
@@ -186,15 +162,7 @@ public abstract class Usuario {
                 ", Fecha Nacimiento=" + fechaNacimiento +
                 ", Edad=" + edad +
                 ", Cedula Identidad='" + cedulaIdentidad + '\'' +
-                ", ITR='" + ITR + '\'' +
                 ", Rol='" + rol + '\'' +
-                ", Permisos:" +
-                "Ingresar, Modificar y Eliminar Usuarios=" + permisoIngresarModificarYEliminarUsuarios +
-                ", Crear, Modificar, Visualizar y EliminarInstancias=" + permisoCrearModificarVisualizarYEliminarInstancias +
-                ", Crear, Eliminar y Modificar Incidencias=" + permisoCrearEliminarYModificarIncidencias +
-                ", Crear, Eliminar y Modificar Reportes=" + permisoCrearEliminarYModificarReportes +
-                ", Crear, Eliminar y Modificar Recordatorios=" + permisoCrearEliminarYModificarRecordatorios +
-                ", Visualizar Datos Sensibles=" + permisoVisualizarDatosSensibles +
                 '}';
     }
 }

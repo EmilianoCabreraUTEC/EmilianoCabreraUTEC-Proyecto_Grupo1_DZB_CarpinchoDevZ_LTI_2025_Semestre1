@@ -6,6 +6,7 @@ RF01.4: En el caso del registro de alumnos, el sistema debe solicitar además la
     si aplica, el tratamiento médico que esté realizando. */
 
 public class Estudiante extends Usuario {
+    private String ITR;
     private String carrera;
     private int semestre;
     private String grupo;
@@ -22,11 +23,12 @@ public class Estudiante extends Usuario {
     }
 
     // Constructor completo
-    public Estudiante(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String ITR, String rol, String direccion, String carrera, int semestre, String grupo,
+    public Estudiante(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol, String direccion,String ITR, String carrera, int semestre, String grupo,
                       String sistemaSalud, String motivoSeguimiento, String estadoSalud, String tratamientoMedico,
                       String estado, String prioridadSeguimiento) {
 
-        super(correoInstitucional,nombre,apellido,fechaNacimiento,cedulaId,ITR,rol,direccion);
+        super(correoInstitucional,nombre,apellido,fechaNacimiento,cedulaId,rol,direccion);
+        this.ITR = ITR;
         this.carrera = carrera;
         this.semestre = semestre;
         this.grupo = grupo;
@@ -39,6 +41,8 @@ public class Estudiante extends Usuario {
     }
 
     // Getters y Setters
+    public String getITR() { return ITR; }
+    public void setITR(String ITR) {this.ITR = ITR;}
 
     public String getCarrera() {
         return carrera;
