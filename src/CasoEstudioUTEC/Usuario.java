@@ -138,6 +138,15 @@ public abstract class Usuario {
         return telefono;
     }
 
+    // Metodo para cambiar la contraseña (como aclaramos que respete el formato anterior y que no pueda guardar la misma?)
+    public boolean cambiarContrasenia(String nuevaContrasenia) {
+        if (nuevaContrasenia == null || nuevaContrasenia.length() <12) {
+            System.out.println("La contraseña debe tener al menos 12 caracteres.");
+            return false;
+        }
+        this.contrasenia = nuevaContrasenia;
+        return true;
+    }
 
     //to string:
     @Override
