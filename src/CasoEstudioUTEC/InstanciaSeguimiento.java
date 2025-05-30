@@ -62,10 +62,6 @@ import java.util.UUID; //
             return hora;
         }
 
-        public void setHora(LocalTime hora) {
-            this.hora = hora;
-        }
-
         public String getTipo() {
             return tipo;
         }
@@ -80,6 +76,13 @@ import java.util.UUID; //
 
         public void setConfidencial(boolean confidencial) {
             this.confidencial = confidencial;
+        }
+
+        public Estudiante getEstudiante() {return estudiante;
+        }
+
+        public void setEstudiante(Estudiante estudiante) {
+            this.estudiante = estudiante;
         }
 
         public Usuario getCreadoPor() {
