@@ -10,6 +10,14 @@ public class Psicopedagogo extends Usuario {
         this.accesoConfidencial = true;
     }
 
+    public String getSectorPsicopedagogia() {
+        return sectorPsicopedagogia;
+    }
+
+    public void setSectorPsicopedagogia(String sectorPsicopedagogia) {
+        this.sectorPsicopedagogia = sectorPsicopedagogia;
+    }
+
     // Constructor completo
     public Psicopedagogo(String correoInstitucional, String nombre, String apellido, String fechaNacimiento,
                          String cedulaId, String ITR, String rol, String direccion, String sectorPsicopedagogia,
@@ -18,5 +26,18 @@ public class Psicopedagogo extends Usuario {
         this.sectorPsicopedagogia = sectorPsicopedagogia;
         this.accesoConfidencial = accesoConfidencial;
 
+    }
+
+    public boolean isAccesoConfidencial() {
+        return accesoConfidencial;
+    }
+
+    public void setAccesoConfidencial(boolean accesoConfidencial) {
+        this.accesoConfidencial = accesoConfidencial;
+    }
+    // Metodo para resetear contraseña de un usuario
+    public void resetearContrasenia(Usuario usuario, String nuevaContrasenia) {
+        usuario.cambiarContrasenia(nuevaContrasenia);
+        System.out.println("Contraseña reseteada para el usuario: " + usuario.getCorreoInstitucional());
     }
 }
