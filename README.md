@@ -28,10 +28,10 @@ vez creado.
 | Nombre completo | Usuario GitHub  | Aporte principal                                                      |
 |-----------------|-----------------|-----------------------------------------------------------------------|
 | Lucas Acuña     | @LucasAcunaUTEC | Clase: Reporte, Recordatorio, Comentario, Incidencia, Rol, Estudiante |
-| Juan Pérez      | @juan.perez     | Clase Pedido                                                          |
+| Emiliano Cabrera| @EmilianoCabreraUTEC| Clase Usuario                                                     |
 | Leticia Rojí    | @leticia-roji   | Clase InstanciaSeguimiento, Psicopedagogo                             |
-> Se puede verificar la participación individual a través del
-historial de commits en este repositorio.
+| Jorge Ugarte    | @               | Clase                                                                 |
+| Matias Grajale  | @               | Clase                                                                 |
 
 ---
 
