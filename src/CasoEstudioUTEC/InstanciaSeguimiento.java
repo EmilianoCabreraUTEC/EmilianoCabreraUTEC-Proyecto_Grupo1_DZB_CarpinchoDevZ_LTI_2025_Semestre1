@@ -12,7 +12,7 @@ import java.util.UUID; //
         private LocalTime hora;
         private String tipo;        // puede ser: reunión, llamado, coordinación.
         private boolean confidencial;
-        private Estudiante estudiante;  //falta crear esta subclase: Estudiante
+        private Estudiante estudiante;
         private Usuario creadoPor;
         private String comentarios;
         private String campoConfidencial;
