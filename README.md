@@ -25,13 +25,13 @@ vez creado.
 ---
 
 ## 󰞵 Participantes
-| Nombre completo | Usuario GitHub  | Aporte principal                                                      |
-|-----------------|-----------------|-----------------------------------------------------------------------|
+| Nombre completo | Usuario GitHub  | Aporte principal                                                     |
+|-----------------|-----------------|----------------------------------------------------------------------|
 | Lucas Acuña     | @LucasAcunaUTEC | Clase: Reporte, Recordatorio, Comentario, Incidencia, Rol, Estudiante |
-| Emiliano Cabrera| @EmilianoCabreraUTEC| Clase Usuario                                                         |
-| Leticia Rojí    | @leticia-roji   | Clase InstanciaSeguimiento, Administrador                             |
-| Jorge Ugarte    | @               | Clase Psicopedagogo                                                   |
-| Matias Grajale  | @               | Clase                                                                 |
+| Emiliano Cabrera| @EmilianoCabreraUTEC| Clase Usuario                                                        |
+| Leticia Rojí    | @leticia-roji   | Clase InstanciaSeguimiento, Administrador, AreaLegal                 |
+| Jorge Ugarte    | @               | Clase Psicopedagogo                                                  |
+| Matias Grajale  | @               | Clase                                                                |
 
 ---
 
