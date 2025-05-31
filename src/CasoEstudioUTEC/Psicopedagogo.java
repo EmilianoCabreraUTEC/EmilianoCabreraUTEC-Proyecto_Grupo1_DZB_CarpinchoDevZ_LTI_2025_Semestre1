@@ -35,9 +35,29 @@ public class Psicopedagogo extends Usuario {
     public void setAccesoConfidencial(boolean accesoConfidencial) {
         this.accesoConfidencial = accesoConfidencial;
     }
-    // Metodo para resetear contraseña de un usuario
-    public void resetearContrasenia(Usuario usuario, String nuevaContrasenia) {
-        usuario.cambiarContrasenia(nuevaContrasenia);
-        System.out.println("Contraseña reseteada para el usuario: " + usuario.getCorreoInstitucional());
+
+    // Metodo para crear una instancia de seguimiento
+    public InstanciaSeguimiento crearInstanciaSeguimiento(String titulo, String fechaString, String horaString,
+                                                          String tipo, boolean confidencial,
+                                                          Estudiante estudiante, String comentarios,
+                                                          String campoConfidencial, boolean motivada) {
+        return new InstanciaSeguimiento(titulo, fechaString, horaString, tipo, confidencial,
+                estudiante, this, comentarios, campoConfidencial, motivada);
     }
+
+    // Metodo para registrar un comentario
+    public Comentario registrarComentario(String texto, boolean confidencial) {
+        return new Comentario(this, texto, confidencial);
+    }
+
+    // Metodo para clasificar estudiante por prioridad
+    public void clasificarEstudiante(Estudiante estudiante, String prioridad) {
+        estudiante.setPrioridadSeguimiento(prioridad);
+    }
+
+    // Metodo toString sobrescrito
+    @Override
+    public String toString() {
+        return "Psicopedagogo: " + getNombre() + " " + getApellido() +
+                " | CI: " + getCedulaIdentidad() + " | Email: " + getCorreoInstitucional();    }
 }
