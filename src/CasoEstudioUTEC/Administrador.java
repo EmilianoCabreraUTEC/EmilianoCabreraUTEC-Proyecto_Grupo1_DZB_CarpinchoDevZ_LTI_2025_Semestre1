@@ -15,7 +15,7 @@ public class Administrador extends Usuario {
 
     // Constructor completo
     public Administrador(String correoInstitucional, String nombre, String apellido, String fechaNacimiento,
-                         String cedulaId, String ITR, String rol, String direccion, String sectorAdministrativo,
+                         String cedulaId, Rol rol, String direccion, String sectorAdministrativo,
                          boolean accesoConfidencial) {
         super(correoInstitucional, nombre, apellido, fechaNacimiento, cedulaId, rol, direccion);
         this.sectorAdministrativo = sectorAdministrativo;

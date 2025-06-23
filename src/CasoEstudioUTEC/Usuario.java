@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Usuario {
-    private String nombre;
-    private String apellido;
-    private String nombreUsuario;//no confundir con nombre, este permite logear al sistema mientras que el otro no
-    private String contrasenia;
-    private String correoInstitucional;//es el correo facilitado por la universidad,formato esperado: nombre.apellido@(estudiante.)utec.edu.uy
-    private String telefono;//el usuario es libre de agregar uno DESPUES de haber sido registrado en el sistema
-    private String direccion;
-    private LocalDate fechaNacimiento;
-    private int edad;
-    private String cedulaIdentidad;
-    private String rol;
+    protected String nombre;
+    protected String apellido;
+    protected String nombreUsuario;//no confundir con nombre, este permite logear al sistema mientras que el otro no
+    protected String contrasenia;
+    protected String correoInstitucional;//es el correo facilitado por la universidad,formato esperado: nombre.apellido@(estudiante.)utec.edu.uy
+    protected String telefono;//el usuario es libre de agregar uno DESPUES de haber sido registrado en el sistema
+    protected String direccion;
+    protected LocalDate fechaNacimiento;
+    protected int edad;
+    protected String cedulaIdentidad;
+    protected Rol rol;
 
     //construcor para añadir un usuario solo con el correo, la contraseña se genera sola y se envia al correo
     public Usuario(String correoInstitucional) {
@@ -24,7 +24,7 @@ public abstract class Usuario {
         this.nombre=extraerNombre(correoInstitucional);//saca el nombre directamente desde el correo
         this.apellido=extraerApellido(correoInstitucional);//lo mismo, pero con el apellido
     }
-    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol, String direccion) {
+    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, Rol rol, String direccion) {
         this.correoInstitucional = correoInstitucional;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -109,10 +109,10 @@ public abstract class Usuario {
     public String getCedulaIdentidad() {
         return cedulaIdentidad;
     }
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
     public String getDireccion() { return direccion;}
@@ -162,7 +162,7 @@ public abstract class Usuario {
                 ", Fecha Nacimiento=" + fechaNacimiento +
                 ", Edad=" + edad +
                 ", Cedula Identidad='" + cedulaIdentidad + '\'' +
-                ", Rol='" + rol + '\'' +
+                ", Rol='" + rol.toString() + '\'' +
                 '}';
     }
 }
