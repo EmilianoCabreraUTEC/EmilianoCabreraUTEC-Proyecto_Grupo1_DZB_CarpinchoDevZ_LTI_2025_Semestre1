@@ -7,7 +7,7 @@ import java.time.LocalDate;
         private boolean accesoConfidencial;
 
         //Constructor
-        public AreaLegal(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, String rol, String direccion, boolean accesoConfidencial, String areaLegal) {
+        public AreaLegal(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, Rol rol, String direccion, boolean accesoConfidencial, String areaLegal) {
             super(correoInstitucional, nombre, apellido, fechaNacimiento, cedulaId, rol, direccion);
             this.accesoConfidencial = accesoConfidencial;
             this.areaLegal = areaLegal;

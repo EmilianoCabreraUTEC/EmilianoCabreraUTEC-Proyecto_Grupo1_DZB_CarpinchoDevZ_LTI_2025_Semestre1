@@ -20,7 +20,7 @@ public class Psicopedagogo extends Usuario {
 
     // Constructor completo
     public Psicopedagogo(String correoInstitucional, String nombre, String apellido, String fechaNacimiento,
-                         String cedulaId, String ITR, String rol, String direccion, String sectorPsicopedagogia,
+                         String cedulaId, String ITR, Rol rol, String direccion, String sectorPsicopedagogia,
                          boolean accesoConfidencial) {
         super(correoInstitucional, nombre, apellido, fechaNacimiento, cedulaId, rol, direccion);
         this.sectorPsicopedagogia = sectorPsicopedagogia;
