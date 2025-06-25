@@ -3,158 +3,115 @@ package CasoEstudioUTEC;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID; //
+import java.util.Objects;
+import java.util.UUID;
 
-    public class InstanciaSeguimiento {
-        private String id; //código identificador único
-        private String titulo;
-        private LocalDate fecha;
-        private LocalTime hora;
-        private String tipo;        // puede ser: reunión, llamado, coordinación.
-        private boolean confidencial;
-        private Estudiante estudiante;
-        private Usuario creadoPor;
-        private String comentarios;
-        private String campoConfidencial;
-        private boolean cancelada;
-        private boolean motivadaPorEstudiante;
+public class InstanciaSeguimiento {
+    private String id; // código identificador único
+    private String titulo;
+    private LocalDate fecha;
+    private LocalTime hora;
+    private String tipo; // reunión, llamado, coordinación
+    private boolean confidencial;
+    private Estudiante estudiante;
+    private Usuario creadoPor;
+    private String comentarios;
+    private String campoConfidencial;
+    private boolean cancelada;
+    private boolean motivadaPorEstudiante;
 
+    // Constructor con validaciones
+    public InstanciaSeguimiento(String titulo, String fechaString, String horaString, String tipo, boolean confidencial,
+                                Estudiante estudiante, Usuario creadoPor, String comentarios,
+                                String campoConfidencial, boolean motivadaPorEstudiante) {
 
-        // Constructor
-        public InstanciaSeguimiento(String titulo, String fechaString, String horaString, String tipo, boolean confidencial,
-                                    Estudiante estudiante, Usuario creadoPor, String comentarios, String campoConfidencial, boolean motivada) {
-            this.id = generarIdUnico();
-            this.titulo = titulo;
-            this.fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            this.hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
-            this.tipo = tipo;
-            this.confidencial = confidencial;
-            this.estudiante = estudiante;
-            this.creadoPor = creadoPor;
-            this.comentarios = comentarios;
-            this.campoConfidencial = campoConfidencial;
-            this.cancelada = false;
-            this.motivadaPorEstudiante = motivadaPorEstudiante;
-        }
-        //Getters y setters
+        this.id = generarIdUnico();
+        this.titulo = Objects.requireNonNull(titulo, "El título no puede ser null");
+        this.fecha = LocalDate.parse(Objects.requireNonNull(fechaString, "La fecha no puede ser null"),
+                DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.hora = LocalTime.parse(Objects.requireNonNull(horaString, "La hora no puede ser null"),
+                DateTimeFormatter.ofPattern("HH:mm"));
+        this.tipo = Objects.requireNonNull(tipo, "El tipo no puede ser null");
+        this.confidencial = confidencial;
+        this.estudiante = Objects.requireNonNull(estudiante, "El estudiante no puede ser null");
+        this.creadoPor = Objects.requireNonNull(creadoPor, "El creador no puede ser null");
+        this.comentarios = comentarios;
+        this.campoConfidencial = campoConfidencial;
+        this.cancelada = false;
+        this.motivadaPorEstudiante = motivadaPorEstudiante;
+    }
 
-        public String getTitulo() {
-            return titulo;
-        }
+    // Getters y Setters
+    public String getId() { return id; }
 
-        public void setTitulo(String titulo) {
-            this.titulo = titulo;
-        }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
 
-        public String getId() {
-            return id;
-        }
+    public LocalDate getFecha() { return fecha; }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
 
-        public LocalDate getFecha() {
-            return fecha;
-        }
+    public LocalTime getHora() { return hora; }
+    public void setHora(LocalTime hora) { this.hora = hora; }
 
-        public void setFecha(LocalDate fecha) {
-            this.fecha = fecha;
-        }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
-        public LocalTime getHora() {
-            return hora;
-        }
+    public boolean isConfidencial() { return confidencial; }
+    public void setConfidencial(boolean confidencial) { this.confidencial = confidencial; }
 
-        public String getTipo() {
-            return tipo;
-        }
+    public Estudiante getEstudiante() { return estudiante; }
+    public void setEstudiante(Estudiante estudiante) { this.estudiante = estudiante; }
 
-        public void setTipo(String tipo) {
-            this.tipo = tipo;
-        }
+    public Usuario getCreadoPor() { return creadoPor; }
 
-        public boolean isConfidencial() {
-            return confidencial;
-        }
+    public String getComentarios() { return comentarios; }
+    public void setComentarios(String comentarios) { this.comentarios = comentarios; }
 
-        public void setConfidencial(boolean confidencial) {
-            this.confidencial = confidencial;
-        }
+    public String getCampoConfidencial() { return campoConfidencial; }
+    public void setCampoConfidencial(String campoConfidencial) { this.campoConfidencial = campoConfidencial; }
 
-        public Estudiante getEstudiante() {return estudiante;
-        }
+    public boolean isCancelada() { return cancelada; }
+    public void setCancelada(boolean cancelada) { this.cancelada = cancelada; }
 
-        public void setEstudiante(Estudiante estudiante) {
-            this.estudiante = estudiante;
-        }
+    public boolean isMotivadaPorEstudiante() { return motivadaPorEstudiante; }
+    public void setMotivadaPorEstudiante(boolean motivadaPorEstudiante) { this.motivadaPorEstudiante = motivadaPorEstudiante; }
 
-        public Usuario getCreadoPor() {
-            return creadoPor;
-        }
+    // Generar nuevo ID único
+    private String generarIdUnico() {
+        return UUID.randomUUID().toString();
+    }
 
-        public String getComentarios() {
-            return comentarios;
-        }
+    // Clonación (genera nuevo ID)
+    public InstanciaSeguimiento clonar() {
+        return new InstanciaSeguimiento(
+                this.titulo + " (copia)",
+                this.fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                this.hora.format(DateTimeFormatter.ofPattern("HH:mm")),
+                this.tipo,
+                this.confidencial,
+                this.estudiante,
+                this.creadoPor,
+                this.comentarios,
+                this.campoConfidencial,
+                this.motivadaPorEstudiante
+        );
+    }
 
-        public void setComentarios(String comentarios) {
-            this.comentarios = comentarios;
-        }
-
-        public String getCampoConfidencial() {
-            return campoConfidencial;
-        }
-
-        public void setCampoConfidencial(String campoConfidencial) {
-            this.campoConfidencial = campoConfidencial;
-        }
-
-        public boolean isCancelada() {
-            return cancelada;
-        }
-
-        public void setCancelada(boolean cancelada) {
-            this.cancelada = cancelada;
-        }
-        public boolean isMotivadaPorEstudiante() {
-            return motivadaPorEstudiante;
-        }
-
-        public void setMotivadaPorEstudiante(boolean motivadaPorEstudiante) {
-            this.motivadaPorEstudiante = motivadaPorEstudiante;
-        }
-
-        // Métodos
-        private String generarIdUnico() {
-            return UUID.randomUUID().toString(); //para que genere un id único
-        }
-        @Override
-        public String toString() {
-            return "Instancia " +
-                    "ID= " + id + '\'' +
-                    ", Titulo='" + titulo + '\'' +
-                    ", Fecha= " + fecha +
-                    ", Hora= " + hora +
-                    ", Tipo= " + tipo + '\'' +
-                    ", Confidencial= " + confidencial +
-                    ", Estudiante= " + estudiante +
-                    ", Creado por= " + creadoPor +
-                    ", Comentarios='" + comentarios + '\'' +
-                    ", Información confidencial= " + campoConfidencial + '\'' +
-                    ", Cancelada=" + cancelada +
-                    ", Motivada por estudiante= " + motivadaPorEstudiante +
-                    '}';
-        }
-
-        public InstanciaSeguimiento clonar() {
-            return new InstanciaSeguimiento(
-                    this.titulo + " (copia)",
-                    this.fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                    this.hora.format(DateTimeFormatter.ofPattern("HH:mm")),
-                    this.tipo,
-                    this.confidencial,
-                    this.estudiante,
-                    this.creadoPor,
-                    this.comentarios,
-                    this.campoConfidencial,
-                    this.motivadaPorEstudiante
-            );
-
+    @Override
+    public String toString() {
+        return "InstanciaSeguimiento{" +
+                "ID='" + id + '\'' +
+                ", Título='" + titulo + '\'' +
+                ", Fecha=" + fecha +
+                ", Hora=" + hora +
+                ", Tipo='" + tipo + '\'' +
+                ", Confidencial=" + confidencial +
+                ", Estudiante=" + estudiante.getNombre() + " " + estudiante.getApellido() +
+                ", Creado por=" + creadoPor.getNombre() + " " + creadoPor.getApellido() +
+                ", Comentarios='" + comentarios + '\'' +
+                ", Información Confidencial='" + campoConfidencial + '\'' +
+                ", Cancelada=" + cancelada +
+                ", MotivadaPorEstudiante=" + motivadaPorEstudiante +
+                '}';
     }
 }
