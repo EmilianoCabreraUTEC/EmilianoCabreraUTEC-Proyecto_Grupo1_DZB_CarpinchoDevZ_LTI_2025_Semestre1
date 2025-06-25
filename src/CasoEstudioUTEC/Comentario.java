@@ -2,6 +2,7 @@ package CasoEstudioUTEC;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Comentario {
 
@@ -9,12 +10,15 @@ public class Comentario {
     private String texto;
     private LocalDateTime fechaCreacion;
     private boolean confidencial;
+    private InstanciaSeguimiento instanciaRelacionado;
 
-    public Comentario(Usuario autor, String texto, boolean confidencial) {
-        this.autor = autor;
+    // Constructor con validaciones
+    public Comentario(Usuario autor, String texto, boolean confidencial, InstanciaSeguimiento instanciaRelacionado) {
+        this.autor = Objects.requireNonNull(autor, "El autor no puede ser null");
         this.texto = texto;
         this.fechaCreacion = LocalDateTime.now();
         this.confidencial = confidencial;
+        this.instanciaRelacionado = Objects.requireNonNull(instanciaRelacionado, "La instancia relacionada no puede ser null");
     }
 
     // Getters
@@ -34,7 +38,11 @@ public class Comentario {
         return confidencial;
     }
 
-    // Setters (solo si necesita modificar el contenido)
+    public InstanciaSeguimiento getInstanciaRelacionado() {
+        return instanciaRelacionado;
+    }
+
+    // Setters
     public void setTexto(String texto) {
         this.texto = texto;
     }
@@ -43,18 +51,19 @@ public class Comentario {
         this.confidencial = confidencial;
     }
 
+    public void setInstanciaRelacionado(InstanciaSeguimiento instanciaRelacionado) {
+        this.instanciaRelacionado = instanciaRelacionado;
+    }
+
     @Override
     public String toString() {
-        String visibilidad = "";
-        if (confidencial) {
-            visibilidad = " (Confidencial)";
-        }
+        String visibilidad = confidencial ? " (Confidencial)" : "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-        return "Comentario" + "\n" +
+        return "Comentario" + visibilidad + "\n" +
                 "Autor: " + autor.getNombre() + " " + autor.getApellido() + "\n" +
                 "Fecha: " + fechaCreacion.format(formatter) + "\n" +
+                "Relacionado a instancia: " + instanciaRelacionado.getId() + "\n" +
                 "Texto: " + texto;
     }
 }
-
