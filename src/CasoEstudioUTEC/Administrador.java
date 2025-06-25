@@ -39,8 +39,12 @@ public class Administrador extends Usuario {
         this.accesoConfidencial = accesoConfidencial;
     }
 
-    // Metodo para resetear contraseña de un usuario
+    // Metodo para resetear contraseña de un usuario - validacion de usuario nulo
     public void resetearContrasenia(Usuario usuario, String nuevaContrasenia) {
+        if (usuario == null || nuevaContrasenia == null || nuevaContrasenia.isEmpty()) {
+            System.out.println("No se puede resetear la contraseña: datos inválidos.");
+            return;
+        }
         usuario.cambiarContrasenia(nuevaContrasenia);
         System.out.println("Contraseña reseteada para el usuario: " + usuario.getCorreoInstitucional());
     }
