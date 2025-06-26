@@ -13,7 +13,7 @@ public class Comentario {
     private InstanciaSeguimiento instanciaRelacionado;
 
     // Constructor con validaciones
-    public Comentario(Usuario autor, String texto, boolean confidencial, InstanciaSeguimiento instanciaRelacionado) {
+    public Comentario(Usuario autor, String texto, boolean confidencial) {
         this.autor = Objects.requireNonNull(autor, "El autor no puede ser null");
         this.texto = texto;
         this.fechaCreacion = LocalDateTime.now();
