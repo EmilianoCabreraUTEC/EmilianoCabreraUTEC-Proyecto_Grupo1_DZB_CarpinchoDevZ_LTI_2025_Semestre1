@@ -1,168 +1,153 @@
 package CasoEstudioUTEC;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public abstract class Usuario {
     protected String nombre;
     protected String apellido;
-    protected String nombreUsuario;//no confundir con nombre, este permite logear al sistema mientras que el otro no
+    protected String nombreUsuario;
     protected String contrasenia;
-    protected String correoInstitucional;//es el correo facilitado por la universidad,formato esperado: nombre.apellido@(estudiante.)utec.edu.uy
-    protected String telefono;//el usuario es libre de agregar uno DESPUES de haber sido registrado en el sistema
+    protected String correoInstitucional;
+    protected String telefono;
     protected String direccion;
     protected LocalDate fechaNacimiento;
     protected int edad;
     protected String cedulaIdentidad;
     protected Rol rol;
 
-    //construcor para añadir un usuario solo con el correo, la contraseña se genera sola y se envia al correo
+    // Constructor básico con solo correo
     public Usuario(String correoInstitucional) {
+        validarCorreo(correoInstitucional);
         this.correoInstitucional = correoInstitucional;
         this.nombreUsuario = crearNombreDeUsuario();
         this.contrasenia = crearContrasenia();
-        this.nombre=extraerNombre(correoInstitucional);//saca el nombre directamente desde el correo
-        this.apellido=extraerApellido(correoInstitucional);//lo mismo, pero con el apellido
+        this.nombre = extraerNombre(correoInstitucional);
+        this.apellido = extraerApellido(correoInstitucional);
     }
-    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento, String cedulaId, Rol rol, String direccion) {
+
+    // Constructor completo
+    public Usuario(String correoInstitucional, String nombre, String apellido, String fechaNacimiento,
+                   String cedulaId, Rol rol, String direccion) {
+
+        validarCorreo(correoInstitucional);
         this.correoInstitucional = correoInstitucional;
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.nombre = Objects.requireNonNull(nombre);
+        this.apellido = Objects.requireNonNull(apellido);
         this.nombreUsuario = crearNombreDeUsuario();
-        this.contrasenia = crearContrasenia();//la contraseña se crea de forma automatica y debe enviarse por correo al usuario
+        this.contrasenia = crearContrasenia();
         this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        this.edad=calcularEdad(this.fechaNacimiento);
-        this.cedulaIdentidad=cedulaId;
-        this.rol=rol;
-        this.direccion=direccion;
+        this.edad = calcularEdad(this.fechaNacimiento);
+        this.cedulaIdentidad = Objects.requireNonNull(cedulaId);
+        this.rol = Objects.requireNonNull(rol);
+        this.direccion = direccion;
     }
 
-    //Metodos de la clase Usuario, diseñados para agilizar la creacion de usuarios
+    // Validación de correo
+    private void validarCorreo(String correo) {
+        if (!correo.matches("^[a-z]+\\.[a-z]+@(estudiante\\.)?utec\\.edu\\.uy$")) {
+            throw new IllegalArgumentException("El correo institucional no tiene el formato válido.");
+        }
+    }
 
-    //metodo que permite generar una contraseña relativamente segura de forma automatica
-    //esta debe ser enviada al nuevo usuario por correo para que ingrese al sistema
-    //se espera que este la cambie luego de esto para garantizar la seguridad
+    // Generación de credenciales
     private String crearContrasenia() {
-        char[] caracteres = {'a', 'b', 'c', 'd', 'e', 'f', '?','!','=','&','%','g', 'h', 'i', 'j', 'k','1','2','3','4', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','5','6','7','8','9','0'};
+        char[] caracteres = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+                '0','1','2','3','4','5','6','7','8','9','!','?','=','&','%'};
         StringBuilder contrasenia = new StringBuilder();
-        for (int i = 0; i <= 10; i++) {
-            //toma un caracter al azar y lo pone en la contraseña
-            //cada una de ellas sera disitinta
-            contrasenia.append(caracteres[(int) Math.ceil(Math.random()*(caracteres.length-1))]);
+        for (int i = 0; i < 12; i++) {
+            int pos = (int) (Math.random() * caracteres.length);
+            contrasenia.append(caracteres[pos]);
         }
         return contrasenia.toString();
     }
-    //debido a que el formato del mail es "nombre.apellido@correo" se puede extraer tanto el
-    // nombre como el apellido de este al remover el punto y lo que esta despues de la arroba
+
     private String extraerNombre(String correo) {
-        String nombre="";
-        nombre=correo.substring(0,correo.indexOf(".")).toUpperCase();//quita el ".apellido@dominio"
-        return nombre;
+        return correo.substring(0, correo.indexOf(".")).toUpperCase();
     }
+
     private String extraerApellido(String correo) {
-        return correo.substring(correo.indexOf(".")+1,correo.indexOf("@")).toUpperCase();//quita el nombre y el "@utec.edu.uy" del correo
+        return correo.substring(correo.indexOf(".") + 1, correo.indexOf("@")).toUpperCase();
     }
-    //usa la logica de los metodos anteriores para generar un nombre de usuario con el
-    //formato de "nombre.apellido"
+
     private String crearNombreDeUsuario() {
-        return extraerNombre(correoInstitucional).toLowerCase()+"."+extraerApellido(correoInstitucional).toLowerCase();
+        return extraerNombre(correoInstitucional).toLowerCase() + "." +
+                extraerApellido(correoInstitucional).toLowerCase();
     }
-    //permite calcular la edad mediante la fecha de nacimiento
-    //´por ahora esta pensado solo para la inicializacion de usuarios en el sistema y no como
-    //una caracteristica continua (o sea que el sistema SIEMPRE calcule la edad cuando esta se requiera)
+
+    // Cálculo de edad
     private int calcularEdad(LocalDate fechaNacimiento) {
-        int edad=0;
-        LocalDate fechaActual=LocalDate.now();
-        edad=fechaActual.getYear() - fechaNacimiento.getYear();
-        return edad;
+        return Period.between(fechaNacimiento, LocalDate.now()).getYears();
     }
 
-    //getters y setters
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getApellido() {
-        return apellido;
-    }
-    public void setApellido(String apellido) {this.apellido = apellido;}
-    public String getContrasenia() {
-        return contrasenia;
-    }
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-    public int getEdad() {
-        return edad;
-    }
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-    public void setEdad(String edad) {
-        this.edad = Integer.parseInt(edad);
-    }
-    public String getCedulaIdentidad() {
-        return cedulaIdentidad;
-    }
-    public Rol getRol() {
-        return rol;
-    }
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-    public String getDireccion() { return direccion;}
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-    }
-    public String getCorreoInstitucional() {
-        return correoInstitucional;
-    }
-    public void setCorreoInstitucional(String correoInstitucional) {
-        this.correoInstitucional = correoInstitucional;
-    }
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-    public String getTelefono() {
-        return telefono;
-    }
-
-    // Metodo para cambiar la contraseña (como aclaramos que respete el formato anterior y que no pueda guardar la misma?)
+    // Cambiar contraseña
     public boolean cambiarContrasenia(String nuevaContrasenia) {
-        if (nuevaContrasenia == null || nuevaContrasenia.length() <12) {
+        if (nuevaContrasenia == null || nuevaContrasenia.length() < 12) {
             System.out.println("La contraseña debe tener al menos 12 caracteres.");
+            return false;
+        }
+        if (nuevaContrasenia.equals(this.contrasenia)) {
+            System.out.println("La nueva contraseña no puede ser igual a la anterior.");
             return false;
         }
         this.contrasenia = nuevaContrasenia;
         return true;
     }
 
-    //to string:
+    // Getters y setters
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getApellido() { return apellido; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
+
+    public String getNombreUsuario() { return nombreUsuario; }
+    public void setNombreUsuario(String nombreUsuario) { this.nombreUsuario = nombreUsuario; }
+
+    public String getCorreoInstitucional() { return correoInstitucional; }
+    public void setCorreoInstitucional(String correoInstitucional) {
+        validarCorreo(correoInstitucional);
+        this.correoInstitucional = correoInstitucional;
+    }
+
+    public String getContrasenia() { return contrasenia; }
+
+    public int getEdad() { return edad; }
+    public void setEdad(int edad) { this.edad = edad; }
+
+    public LocalDate getFechaNacimiento() { return fechaNacimiento; }
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = LocalDate.parse(fechaNacimiento, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.edad = calcularEdad(this.fechaNacimiento);
+    }
+
+    public String getCedulaId() { return cedulaIdentidad; }
+    public void setCedulaId(String cedulaIdentidad) { this.cedulaIdentidad = cedulaIdentidad; }
+
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
+
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+
+    public Rol getRol() { return rol; }
+    public void setRol(Rol rol) { this.rol = rol; }
+
     @Override
     public String toString() {
         return "Usuario{" +
                 "Nombre='" + nombre + '\'' +
                 ", Apellido='" + apellido + '\'' +
-                ", Nombre de Usuario='" + nombreUsuario + '\'' +
-                ", Contraseña='" + contrasenia + '\'' +
-                ", Correo Institucional='" + correoInstitucional + '\'' +
-                ", Telefono='" + telefono + '\'' +
-                ", Direccion='" + direccion + '\'' +
-                ", Fecha Nacimiento=" + fechaNacimiento +
+                ", Usuario='" + nombreUsuario + '\'' +
+                ", Correo='" + correoInstitucional + '\'' +
+                ", Teléfono='" + telefono + '\'' +
+                ", Dirección='" + direccion + '\'' +
+                ", FechaNacimiento=" + fechaNacimiento +
                 ", Edad=" + edad +
-                ", Cedula Identidad='" + cedulaIdentidad + '\'' +
-                ", Rol='" + rol.toString() + '\'' +
+                ", Cédula='" + cedulaIdentidad + '\'' +
+                ", Rol=" + rol.getNombre() +
                 '}';
     }
 }
