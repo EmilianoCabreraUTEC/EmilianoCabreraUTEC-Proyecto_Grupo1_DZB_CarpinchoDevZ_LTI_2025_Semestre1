@@ -1,10 +1,4 @@
 package CasoEstudioUTEC;
-/*
-Según los requerimientos:
--Generar un reporte por estudiante y rango de fechas.
--Incluir instancias de seguimiento y recordatorios.
--Poder representarse en varios formatos (PDF, Excel, CSV, visualización en pantalla).
- */
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,33 +6,31 @@ import java.util.UUID;
 
 public class Reporte {
     private String id;
-    private Estudiante estudiante; //falta aun la subclase Estudiante, se asume que tendra metodos getNombre y getApellido
+    private Estudiante estudiante;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private List<InstanciaSeguimiento> instancias;
     private List<Recordatorio> recordatorios;
 
-public Reporte(Estudiante estudiante, LocalDate fechaInicio, LocalDate fechaFin,
-               List<InstanciaSeguimiento> instancias, List<Recordatorio> recordatorios) {
-    this.id = generarIdUnico();
-    this.estudiante = estudiante;
-    this.fechaInicio = fechaInicio;
-    this.fechaFin = fechaFin;
-    this.instancias = instancias;
-    this.recordatorios = recordatorios;
-}
+    // Constructor
+    public Reporte(Estudiante estudiante, LocalDate fechaInicio, LocalDate fechaFin,
+                   List<InstanciaSeguimiento> instancias, List<Recordatorio> recordatorios) {
+        this.id = generarIdUnico();
+        this.estudiante = estudiante;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.instancias = instancias;
+        this.recordatorios = recordatorios;
+    }
+
     private String generarIdUnico() {
         return UUID.randomUUID().toString();
     }
 
-    /* getId asumimos que aun no es necesario, luego se puede usar para maniobrar los reportes
+    // Getters
     public String getId() {
         return id;
-        }
- */
-
-
-// De momento algunos getters sencillos, más adelante evaluaremos según los requerimentos el tema de generar pdf o csv
+    }
 
     public Estudiante getEstudiante() {
         return estudiante;
@@ -60,15 +52,46 @@ public Reporte(Estudiante estudiante, LocalDate fechaInicio, LocalDate fechaFin,
         return recordatorios;
     }
 
+    // Representación en texto
     @Override
     public String toString() {
-        return "Reporte para: " + estudiante.getNombre() + " " + estudiante.getApellido() +
-                " del " + fechaInicio + " al " + fechaFin;
+        StringBuilder sb = new StringBuilder();
+        sb.append(" Reporte para: ").append(estudiante.getNombre()).append(" ").append(estudiante.getApellido()).append("\n");
+        sb.append(" Rango: ").append(fechaInicio).append(" al ").append(fechaFin).append("\n\n");
 
-        /* falta agregar en la respuesta las instancias registradas de ese estudiante y los recordatorios,
-        que deberian mostrarse en el reporte
-        */
+        sb.append(" Instancias de seguimiento:\n");
+        if (instancias.isEmpty()) {
+            sb.append("   - No hay instancias registradas.\n");
+        } else {
+            for (InstanciaSeguimiento i : instancias) {
+                sb.append("   • ").append(i.getFecha()).append(" ").append(i.getHora())
+                        .append(" - ").append(i.getTitulo()).append(" (").append(i.getTipo()).append(")\n");
+            }
+        }
 
+        sb.append("\n Recordatorios:\n");
+        if (recordatorios.isEmpty()) {
+            sb.append("   - No hay recordatorios registrados.\n");
+        } else {
+            for (Recordatorio r : recordatorios) {
+                sb.append("   • ").append(r.getFecha()).append(" ").append(r.getHora())
+                        .append(" - ").append(r.getTitulo()).append(" [").append(r.getFrecuencia()).append("]\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // Placeholder para exportar (sólo como idea para futuro ya que se plantea en los requerimentos pero tiene logica compleja)
+    public void exportarPDF() {
+        System.out.println("Exportando reporte a PDF... (funcionalidad pendiente)");
+    }
+
+    public void exportarCSV() {
+        System.out.println("Exportando reporte a CSV... (funcionalidad pendiente)");
+    }
+
+    public void exportarExcel() {
+        System.out.println("Exportando reporte a Excel... (funcionalidad pendiente)");
     }
 }
-
