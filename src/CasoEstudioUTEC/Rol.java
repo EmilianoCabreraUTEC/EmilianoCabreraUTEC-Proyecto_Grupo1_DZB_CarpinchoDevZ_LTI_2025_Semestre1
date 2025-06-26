@@ -1,14 +1,15 @@
 package CasoEstudioUTEC;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Rol {
     private String nombre;
     private List<String> permisos;
 
     public Rol(String nombre, List<String> permisos) {
-        this.nombre = nombre;
-        this.permisos = permisos;
+        this.nombre = Objects.requireNonNull(nombre, "El nombre del rol no puede ser null");
+        this.permisos = Objects.requireNonNull(permisos, "Los permisos no pueden ser null");
     }
 
     public String getNombre() {
@@ -16,7 +17,9 @@ public class Rol {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        }
     }
 
     public List<String> getPermisos() {
@@ -24,32 +27,32 @@ public class Rol {
     }
 
     public void setPermisos(List<String> permisos) {
-        this.permisos = permisos;
+        if (permisos != null) {
+            this.permisos = permisos;
+        }
     }
 
-    // Verificar si el rol tiene cierto permiso
+    // Verifica si el rol tiene un permiso específico
     public boolean tienePermiso(String permiso) {
         return permisos != null && permisos.contains(permiso);
     }
 
-    // metodos para trabajar en un futuro
-
-    // permisos para un estudiante
+    // Permisos predefinidos (reutilizables)
     public static List<String> permisosEstudiante() {
-            return List.of("ver_perfil", "editar_perfil");
-        }
-    // permisos para un psicopedagogo
+        return List.of("ver_perfil", "editar_perfil");
+    }
+
     public static List<String> permisosPsicopedagogo() {
-    return List.of(
-            "ver_confidencial",
-            "crear_instancia",
-            "editar_comentarios",
-            "crear_recordatorio",
-            "consultar_historial",
-            "generar_informes"
-    );
-}
-    // prmisos para un administrador
+        return List.of(
+                "ver_confidencial",
+                "crear_instancia",
+                "editar_comentarios",
+                "crear_recordatorio",
+                "consultar_historial",
+                "generar_informes"
+        );
+    }
+
     public static List<String> permisosAdministrador() {
         return List.of(
                 "crear_usuario",
@@ -60,11 +63,22 @@ public class Rol {
         );
     }
 
+    // Fábrica de roles comunes
+    public static Rol crearRolEstudiante() {
+        return new Rol("Estudiante", permisosEstudiante());
+    }
+
+    public static Rol crearRolPsicopedagogo() {
+        return new Rol("Psicopedagogo", permisosPsicopedagogo());
+    }
+
+    public static Rol crearRolAdministrador() {
+        return new Rol("Administrador", permisosAdministrador());
+    }
+
     @Override
     public String toString() {
-        return "Rol: " + nombre + ", Permisos: " + permisos;
+        return "🔐 Rol: " + nombre + "\n" +
+                "Permisos: " + String.join(", ", permisos);
     }
 }
-
-// EJEMPLO DE ROL
-// Rol psicopedagogo = new Rol("Psicopedagogo", List.of("ver_confidencial", "crear_instancia", "editar_comentarios"));
